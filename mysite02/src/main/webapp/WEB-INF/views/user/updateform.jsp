@@ -1,7 +1,6 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	String no = request.getParameter("no");
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +29,7 @@
 					
 					<fieldset>
 						<%
-						
+							
 						%>
 						<legend>성별</legend>
 						<label>여</label> <input type="radio" name="gender" value="female" checked="checked">

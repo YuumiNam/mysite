@@ -51,8 +51,8 @@ public class UserController extends HttpServlet {
 //				return;
 //			}
 			
-			UserVo vo = new UserDao().findByNo(authUser.getNo());
-			request.setAttribute("userVo", vo);
+//			UserVo vo = new UserDao().findByNo(authUser.getNo());
+//			request.setAttribute("userVo", vo);
 			
 			request.getRequestDispatcher("/WEB-INF/views/user/updateform.jsp").forward(request, response);
 		} else if("update".equals(action)) {
