@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import com.bitacademy.mysite02.vo.UserVo;
 
 public class UserDao {
+	
+	// 로그인
 	public UserVo findByEmailAndPassword(String email, String password) {
 		UserVo result = null;
 		
@@ -62,7 +64,59 @@ public class UserDao {
 
 		return result;
 	}
+	
+	
+	public UserVo findByNo(Long no) {
+		UserVo result = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			// 1, 2
+			conn = getConnection();
 
+			// 3. statement 준비
+			String sql = "select no, name from user where email = ? and password = ?"; // 쿼리
+
+			pstmt = conn.prepareStatement(sql); // row값
+
+			// 4. binding
+			pstmt.setLong(1, no);
+			
+			// 5. 실행
+			rs = pstmt.executeQuery();
+			
+			
+			// 6. 결과처리
+			if(rs.next()) {
+				Long num = rs.getLong(1);
+		
+				result = new UserVo();
+				result.setNo(num);
+			}
+
+
+		} catch (SQLException e) {
+			System.out.println("Error:" + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+	
 	
 	// 회원가입
 	public Boolean insert(UserVo vo) {
@@ -110,6 +164,58 @@ public class UserDao {
 		return result;
 	}
 
+	
+	// 회원정보수정
+	public boolean update(UserVo vo) {
+		boolean result = false;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			
+			conn = getConnection();
+			
+			
+			//3. statement 준비
+			String sql = 
+					"update user set name = ? where no = ? and email = ?"; // 쿼리
+			
+			pstmt = conn.prepareStatement(sql); // row값
+	
+			//4. Binding
+			pstmt.setString(1, vo.getName());
+			pstmt.setLong(2, vo.getNo());
+			pstmt.setString(3, vo.getEmail());
+			
+			
+			//4. SQL 실행
+			int count = pstmt.executeUpdate(); // 
+			
+			//5. 결과처리
+			result = count == 1;
+			
+		} catch (SQLException e) {
+			System.out.println("Error:" + e);
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	
+	}
+	
+	// 예외처리
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
 
@@ -126,5 +232,6 @@ public class UserDao {
 
 		return conn;
 	}
+
 
 }

@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.bitacademy.mysite02.dao.UserDao;
 import com.bitacademy.mysite02.vo.UserVo;
@@ -40,6 +41,34 @@ public class UserController extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/user/joinsuccess.jsp").forward(request, response);
 		} else if("loginform".equals(action)) {
 			request.getRequestDispatcher("./WEB-INF/views/user/loginform.jsp").forward(request, response);
+		} else if("updateform".equals(action)) {
+			// Access Control
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)request.getAttribute("authUser"); //getAttribute는 set을 안해주면 빈 객체 null을 리턴 지금은 로그인이 되어있는상태라고 가정
+			
+//			if(authUser == null) {
+//				response.sendRedirect(request.getContextPath()+"/user?a=loginform");
+//				return;
+//			}
+			
+			UserVo vo = new UserDao().findByNo(authUser.getNo());
+			request.setAttribute("userVo", vo);
+			
+			request.getRequestDispatcher("/WEB-INF/views/user/updateform.jsp").forward(request, response);
+		} else if("update".equals(action)) {
+			String name = request.getParameter("name");
+			String no = request.getParameter("no");
+			String email = request.getParameter("email");
+			
+			 UserVo vo= new UserVo();
+			 vo.setName(name);
+			 vo.setPassword(no);
+			 vo.setEmail(email);
+			 
+			 new UserDao().update(vo);
+			 
+			 response.sendRedirect("request.getContextPath()");
+			
 		} else if("login".equals(action)) {
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
@@ -54,9 +83,23 @@ public class UserController extends HttpServlet {
 			}
 			
 			/* 로그인처리 */
-			
+			HttpSession session = request.getSession(true); // 입력한 authUser정보를 넣은 요청중에 jsessionid 쿠키가 같은것을 객체로 생성된 session에다가 넣어줌
+			session.setAttribute("authUser", authUser);
 			
 			response.sendRedirect(request.getContextPath());
+		} else if("logout".equals(action)) {
+			HttpSession session = request.getSession();
+			if(session == null) {
+				response.sendRedirect(request.getContextPath());
+				return; // 확실히 코드를 끝내줘야함
+			}
+			
+			session.removeAttribute("authUser"); // 로그인했던 jsessionid를 삭제해줌
+			session.invalidate(); // 새로운 jsessionid 발급해줌
+			
+			response.sendRedirect(request.getContextPath());
+		} else {
+			response.sendRedirect(request.getContextPath()); // "user?a= "뒤에 이상한 값을 넣어도 메인화면으로 복귀할 수 있도록
 		}
 	}
 
