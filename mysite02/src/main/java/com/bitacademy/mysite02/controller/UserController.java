@@ -35,6 +35,7 @@ public class UserController extends HttpServlet {
 			
 			new UserDao().insert(vo);
 			response.sendRedirect(request.getContextPath() + "/user?a=joinsuccess");
+			
 		} else if("joinsuccess".equals(action)) {
 			request.getRequestDispatcher("/WEB-INF/views/user/joinsuccess.jsp").forward(request, response);
 		} else if("loginform".equals(action)) {
