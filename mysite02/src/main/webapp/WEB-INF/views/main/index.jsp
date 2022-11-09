@@ -4,24 +4,17 @@
 <head>
 	<title>mysite</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<link href="./assets/css/main.css" rel="stylesheet" type="text/css">
+	<link href="<%=request.getContextPath() %>/assets/css/user.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-			<h1>MySite</h1>
-			<ul>
-				<li><a href="./user?a=loginform">로그인</a><li>
-				<li><a href="./user?a=joinform">회원가입</a><li>
-				<li><a href="./user?a=updateform">회원정보수정</a><li>
-				<li><a href="./user?a=logout">로그아웃</a><li>
-				<li>님 안녕하세요 ^^;</li>
-			</ul>
-		</div>
+		
+		<jsp:include page="/WEB-INF/views/includes/header.jsp"/>
+		
 		<div id="wrapper">
 			<div id="content">
 				<div id="site-introduction">
-					<img id="profile" src="./assets/images/nature.jpg" style="width:200px">
+					<img id="profile" src="<%=request.getContextPath() %>/assets/images/nature.jpg" style="width:200px">
 					<h2>안녕하세요. <br/>이선무의 mysite에 오신것을 환영합니다.</h2>
 					<p>
 						이 사이트는 웹 프로그램밍 실습과제 예제 사이트입니다.<br>
@@ -39,9 +32,9 @@
 				<li><a href="">게시판</a></li>
 			</ul>
 		</div>
-		<div id="footer">
-			<p>(c)opyright 2020, 2021, 2022</p>
-		</div>
+		
+		<jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
+		
 	</div>
 </body>
 </html>
