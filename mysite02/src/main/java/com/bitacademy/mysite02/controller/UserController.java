@@ -46,10 +46,10 @@ public class UserController extends HttpServlet {
 			HttpSession session = request.getSession();
 			UserVo authUser = (UserVo)request.getAttribute("authUser"); //getAttribute는 set을 안해주면 빈 객체 null을 리턴 지금은 로그인이 되어있는상태라고 가정
 			
-//			if(authUser == null) {
-//				response.sendRedirect(request.getContextPath()+"/user?a=loginform");
-//				return;
-//			}
+			if(authUser == null) {
+				response.sendRedirect(request.getContextPath()+"/user?a=loginform");
+				return;
+			}
 			
 //			UserVo vo = new UserDao().findByNo(authUser.getNo());
 //			request.setAttribute("userVo", vo);
