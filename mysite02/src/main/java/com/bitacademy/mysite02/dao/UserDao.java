@@ -65,7 +65,7 @@ public class UserDao {
 		return result;
 	}
 	
-	
+	// update할 정보 불러오기
 	public UserVo findByNo(Long no) {
 		UserVo result = null;
 		
@@ -79,7 +79,7 @@ public class UserDao {
 			conn = getConnection();
 
 			// 3. statement 준비
-			String sql = "select no, name from user where email = ? and password = ?"; // 쿼리
+			String sql = "select name, email, gender from user where no = ?"; // 쿼리
 
 			pstmt = conn.prepareStatement(sql); // row값
 
@@ -92,10 +92,14 @@ public class UserDao {
 			
 			// 6. 결과처리
 			if(rs.next()) {
-				Long num = rs.getLong(1);
+				String name = rs.getString(1);
+				String email = rs.getString(2);
+				String gender = rs.getString(3);
 		
 				result = new UserVo();
-				result.setNo(num);
+				result.setName(name);
+				result.setEmail(email);
+				result.setGender(gender);
 			}
 
 
@@ -179,16 +183,26 @@ public class UserDao {
 			
 			
 			//3. statement 준비
-			String sql = 
-					"update user set name = ? where no = ? and email = ?"; // 쿼리
+			if("".equals(vo.getPassword())) {
+			String sql = "update user set name = ?, gender = ? where no = ?"; // 쿼리
 			
 			pstmt = conn.prepareStatement(sql); // row값
 	
 			//4. Binding
 			pstmt.setString(1, vo.getName());
-			pstmt.setLong(2, vo.getNo());
-			pstmt.setString(3, vo.getEmail());
-			
+			pstmt.setString(2, vo.getGender());
+			pstmt.setLong(3, vo.getNo());
+			} else {
+				String sql = "update user set name = ?, password = ?, gender = ? where no = ?";
+				
+				pstmt = conn.prepareStatement(sql); // row값
+				
+				//4. Binding
+				pstmt.setString(1, vo.getName());
+				pstmt.setString(2, vo.getPassword());
+				pstmt.setString(3, vo.getGender());
+				pstmt.setLong(4, vo.getNo());
+			}
 			
 			//4. SQL 실행
 			int count = pstmt.executeUpdate(); // 

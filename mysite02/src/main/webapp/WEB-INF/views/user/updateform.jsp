@@ -1,6 +1,8 @@
-
+<%@page import="com.bitacademy.mysite02.vo.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%
+	UserVo userVo = (UserVo)request.getAttribute("userVo");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,26 +21,26 @@
 				<form id="join-form" name="joinForm" method="post" action="<%=request.getContextPath() %>/user">
 					<input type = 'hidden' name = "a" value = "update">
 					<label class="block-label" for="name">이름</label>
-					<input id="name" name="name" type="text" value="">
+					<input id="name" name="name" type="text" value="<%=userVo.getName() %>">
 
 					<label class="block-label" for="email">이메일</label>
-					<h4>xxxxxx@xxxxx.com</h4>
+					<h4>"<%=userVo.getEmail() %>"</h4>
 					
 					<label class="block-label">패스워드</label>
 					<input name="password" type="password" value="">
 					
 					<fieldset>
 						<%
-							
+							if("femail".equals(userVo.getGender())) {
 						%>
 						<legend>성별</legend>
 						<label>여</label> <input type="radio" name="gender" value="female" checked="checked">
 						<%
-							
+							} else {
 						%>
-						<label>남</label> <input type="radio" name="gender" value="male">
+						<label>남</label> <input type="radio" name="gender" value="male" checked="checked">
 						<%
-							
+							}
 						%>
 					</fieldset>
 					

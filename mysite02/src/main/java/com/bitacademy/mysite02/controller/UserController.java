@@ -44,30 +44,46 @@ public class UserController extends HttpServlet {
 		} else if("updateform".equals(action)) {
 			// Access Control
 			HttpSession session = request.getSession();
-			UserVo authUser = (UserVo)request.getAttribute("authUser"); //getAttribute는 set을 안해주면 빈 객체 null을 리턴 지금은 로그인이 되어있는상태라고 가정
+			UserVo authUser = (UserVo)session.getAttribute("authUser"); //getAttribute는 set을 안해주면 빈 객체 null을 리턴 지금은 로그인이 되어있는상태라고 가정
 			
 			if(authUser == null) {
 				response.sendRedirect(request.getContextPath()+"/user?a=loginform");
 				return;
 			}
+			////
 			
-//			UserVo vo = new UserDao().findByNo(authUser.getNo());
-//			request.setAttribute("userVo", vo);
+			UserVo vo = new UserDao().findByNo(authUser.getNo());
+			request.setAttribute("userVo", vo);
 			
 			request.getRequestDispatcher("/WEB-INF/views/user/updateform.jsp").forward(request, response);
 		} else if("update".equals(action)) {
+			// Access Control
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser"); //getAttribute는 set을 안해주면 빈 객체 null을 리턴 지금은 로그인이 되어있는상태라고 가정
+						
+			if(authUser == null) {
+				response.sendRedirect(request.getContextPath()+"/user?a=loginform");
+				return;
+			}
+			////
+			
 			String name = request.getParameter("name");
-			String no = request.getParameter("no");
-			String email = request.getParameter("email");
+			String password = request.getParameter("password");
+			String gender = request.getParameter("gender");
 			
 			 UserVo vo= new UserVo();
+			 vo.setNo(authUser.getNo());
 			 vo.setName(name);
-			 vo.setPassword(no);
-			 vo.setEmail(email);
+			 vo.setPassword(password);
+			 vo.setGender(gender);
 			 
+			 // update db
 			 new UserDao().update(vo);
 			 
-			 response.sendRedirect("request.getContextPath()");
+			 // update session
+			 authUser.setName(name);
+			 
+			 response.sendRedirect(request.getContextPath() + "/user?a=updateform");
 			
 		} else if("login".equals(action)) {
 			String email = request.getParameter("email");
