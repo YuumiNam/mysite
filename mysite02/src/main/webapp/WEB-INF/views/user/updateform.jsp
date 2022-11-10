@@ -35,9 +35,11 @@
 						%>
 						<legend>성별</legend>
 						<label>여</label> <input type="radio" name="gender" value="female" checked="checked">
+						<label>남</label> <input type="radio" name="gender" value="male">
 						<%
 							} else {
 						%>
+						<label>여</label> <input type="radio" name="gender" value="female">
 						<label>남</label> <input type="radio" name="gender" value="male" checked="checked">
 						<%
 							}
