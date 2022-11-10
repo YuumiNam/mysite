@@ -176,7 +176,7 @@ public class GuestbookDao {
 		
 	}
 	
-	
+	// 예외처리
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
 		
