@@ -44,7 +44,7 @@ public class UserController extends HttpServlet {
 		} else if("updateform".equals(action)) {
 			// Access Control
 			HttpSession session = request.getSession();
-			UserVo authUser = (UserVo)session.getAttribute("authUser"); //getAttribute는 set을 안해주면 빈 객체 null을 리턴 지금은 로그인이 되어있는상태라고 가정
+			UserVo authUser = (UserVo)session.getAttribute("authUser"); // updateform을 실행시킨다는것은 로그인이 되어있는상태라고 가정하에 getAttribute값에 authUser를 찾는다.
 			
 			if(authUser == null) {
 				response.sendRedirect(request.getContextPath()+"/user?a=loginform");
@@ -99,8 +99,8 @@ public class UserController extends HttpServlet {
 			}
 			
 			/* 로그인처리 */
-			HttpSession session = request.getSession(true); // 입력한 authUser정보를 넣은 요청중에 jsessionid 쿠키가 같은것을 객체로 생성된 session에다가 넣어줌
-			session.setAttribute("authUser", authUser);
+			HttpSession session = request.getSession(true); // 입력한 authUser(로그인정보)를 넣은 요청을 객체로 생성된 session에다가 넣어줌
+			session.setAttribute("authUser", authUser);		// jssessionid가 있는 이유는 요청을 분류해야할 필요가 있기 때문(user1이 보낸요청과 user2가 보낸요청을 분류해야함)
 			
 			response.sendRedirect(request.getContextPath());
 		} else if("logout".equals(action)) {
