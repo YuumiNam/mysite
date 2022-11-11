@@ -11,13 +11,15 @@ import javax.servlet.http.HttpFilter;
 
 
 public class EncodingFilter extends HttpFilter implements Filter {
+	private String encoding = "utf-8";
+	
 	public void init(FilterConfig fConfig) throws ServletException {
-
+		encoding = fConfig.getInitParameter("encoding");
 	}
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		/* request처리 */
-		request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding(encoding);
 		
 		chain.doFilter(request, response);
 		
