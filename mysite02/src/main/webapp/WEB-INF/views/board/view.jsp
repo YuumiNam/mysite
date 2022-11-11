@@ -42,16 +42,13 @@
 				</div>
 			</div>
 		</div>
-		<div id="navigation">
-			<ul>
-				<li><a href="">안대혁</a></li>
-				<li><a href="">방명록</a></li>
-				<li><a href="">게시판</a></li>
-			</ul>
-		</div>
-		<div id="footer">
-			<p>(c)opyright 2015, 2016, 2017, 2018</p>
-		</div>
+		
+		<!-- navigation -->
+		<c:import url = "/WEB-INF/views/includes/navigation.jsp" />
+		
+		<!-- footer -->
+		<c:import url = "/WEB-INF/views/includes/footer.jsp" />
+		
 	</div>
 </body>
 </html>

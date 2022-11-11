@@ -17,8 +17,9 @@
 
 		<div id="content">
 			<div id="board">
-				<form class="board-form" method="post" action="/board">
+				<form class="board-form" method="post" action="./board">
 					<input type = "hidden" name = "a" value="write">
+					<input type = "hidden" name = "no" value="${authUser.no}">
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글쓰기</th>
@@ -30,12 +31,12 @@
 						<tr>
 							<td class="label">내용</td>
 							<td>
-								<textarea id="content" name="content"></textarea>
+								<textarea id="content" name="contents"></textarea>
 							</td>
 						</tr>
 					</table>
 					<div class="bottom">
-						<a href="/board">취소</a>
+						<a href="./board">취소</a>
 						<input type="submit" value="등록">
 					</div>
 				</form>				
