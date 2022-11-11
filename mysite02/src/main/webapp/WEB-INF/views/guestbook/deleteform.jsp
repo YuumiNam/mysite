@@ -13,6 +13,7 @@
 <body>
 	<div id="container">
 		
+		<!-- header -->
 		<c:import url = "/WEB-INF/views/includes/header.jsp" />
 		
 		<div id="content">
@@ -28,8 +29,10 @@
 			</div>
 		</div>
 		
+		<!-- navigation -->
 		<c:import url = "/WEB-INF/views/includes/navigation.jsp" />
 		
+		<!-- footer -->
 		<c:import url = "/WEB-INF/views/includes/footer.jsp" />
 		
 	</div>

@@ -1,23 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri= "http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri= "http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri= "http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>mysite</title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="/assets/css/board.css" rel="stylesheet" type="text/css">
+	<title>mysite</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<link href="./assets/css/board.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-			<h1>MySite</h1>
-			<ul>
-				<li><a href="">로그인</a><li>
-				<li><a href="">회원가입</a><li>
-				<li><a href="">회원정보수정</a><li>
-				<li><a href="">로그아웃</a><li>
-				<li>님 안녕하세요 ^^;</li>
-			</ul>
-		</div>
+	
+		<!-- header -->
+		<c:import url = "/WEB-INF/views/includes/header.jsp" />
+
 		<div id="content">
 			<div id="board" class="board-form">
 				<table class="tbl-ex">
@@ -41,7 +38,7 @@
 				</table>
 				<div class="bottom">
 					<a href="">글목록</a>
-					<a href="">글수정</a>
+					<a href="">글수정</a> <!-- authuser가 not empty일때만 보이도록... authuer의 no와 url의 no가 같으면 된다 -->
 				</div>
 			</div>
 		</div>

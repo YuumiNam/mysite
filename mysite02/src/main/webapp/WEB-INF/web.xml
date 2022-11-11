@@ -4,19 +4,13 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 	<display-name>mysite02</display-name>
-	
-	<!-- Application Parameter -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/applicationContext.xml</param-value>
 	</context-param>
-
-	<!-- Listeners -->
 	<listener>
 		<listener-class>com.bitacademy.web.ContextLoadListener</listener-class>
 	</listener>
-
-	<!-- Filters -->
 	<filter>
 		<display-name>EncodingFilter</display-name>
 		<filter-name>EncodingFilter</filter-name>
@@ -30,8 +24,6 @@
 		<filter-name>EncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
-	<!-- Servlets -->
 	<servlet>
 		<description></description>
 		<display-name>MainController</display-name>
@@ -70,8 +62,6 @@
 		<servlet-name>GuestController</servlet-name>
 		<url-pattern>/guestbook</url-pattern>
 	</servlet-mapping>
-
-	<!-- Welcome Files(Default Files) -->
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
@@ -80,4 +70,14 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	<servlet>
+		<description></description>
+		<display-name>BoardController</display-name>
+		<servlet-name>BoardController</servlet-name>
+		<servlet-class>com.bitacademy.mysite02.controller.BoardController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BoardController</servlet-name>
+		<url-pattern>/board</url-pattern>
+	</servlet-mapping>
 </web-app>
