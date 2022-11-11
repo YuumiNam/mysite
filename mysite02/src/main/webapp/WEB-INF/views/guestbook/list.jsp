@@ -3,10 +3,8 @@
 <%@ taglib uri= "http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri= "http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<!-- contents의 개행을 나타내주는것은 불가피하게 자바언어가 필요 -->
-<%
-		pageContext.setAttribute("newline", "\n");
-%>
+
+<%pageContext.setAttribute("newline", "\n");%> <!-- contents의 개행을 나타내주는것은 불가피하게 자바언어가 필요 -->
 
 <!DOCTYPE html>
 <html>
@@ -43,14 +41,14 @@
 						<table>
 							<c:forEach items = '${list }' var ='vo' varStatus = 'status'>
 								<tr>
-									<td>[${status.count }]</td>
+									<td>[${status.index }]</td>
 									<td>${vo.name }</td>
 									<td>${vo.date }</td>
 									<td><a href="${pageContext.request.contextPath}/guestbook?a=deleteform&no=${vo.no }">삭제</a></td>
 								</tr>
 								<tr>
 									<td colspan=4>
-										${fn:replace(vo.contents, 'newline', '<br/>') }
+										${fn:replace(vo.contents, newline, '<br/>') }
 									</td>
 								</tr>
 							</c:forEach>	
