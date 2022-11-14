@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bitacademy.mysite02.dao.BoardDao;
-import com.bitacademy.mysite02.dao.GuestbookDao;
 import com.bitacademy.mysite02.vo.BoardVo;
 
 public class BoardController extends HttpServlet {
