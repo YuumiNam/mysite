@@ -24,22 +24,22 @@
 					</tr>
 					<tr>
 						<td class="label">제목</td>
-						<td>제목입니다.</td>
+						<td>${BoardVo.title }</td>
 					</tr>
 					<tr>
 						<td class="label">내용</td>
 						<td>
 							<div class="view-content">
-								내용 1입니다.<br>
-								내용 2입니다.<br>
-								내용 3입니다.
+								${BoardVo.contents }
 							</div>
 						</td>
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="">글목록</a>
-					<a href="">글수정</a> <!-- authuser가 not empty일때만 보이도록... authuer의 no와 url의 no가 같으면 된다 -->
+					<a href="./board">글목록</a>
+					<c:if test = "${not empty authUser}">
+					<a href="./board?a=modifyform&no=${param.no }">글수정</a> <!-- authuser가 not empty일때만 보이도록 -->
+					</c:if>
 				</div>
 			</div>
 		</div>

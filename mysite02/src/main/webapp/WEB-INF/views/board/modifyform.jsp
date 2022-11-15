@@ -18,7 +18,7 @@
 
 		<div id="content">
 			<div id="board">
-				<form class="board-form" method="post" action="">
+				<form class="board-form" method="post" action="./board">
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글수정</th>
@@ -30,7 +30,7 @@
 						<tr>
 							<td class="label">내용</td>
 							<td>
-								<textarea id="content" name="content">수정해야 할 글은 고대로 
+								<textarea id="content" name="contents">수정해야 할 글은 고대로 
 이렇게 textarea에 뿌려야 합니다.
 개행문자 변경도 하지마세요.
 하하하하하
@@ -39,7 +39,6 @@
 						</tr>
 					</table>
 					
-					<!-- login한 사람에게만 보이도록 -->
 					<div class="bottom">
 						<a href="./board">취소</a>
 						<input type="submit" value="수정">

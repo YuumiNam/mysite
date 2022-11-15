@@ -37,7 +37,7 @@
 						<tr>
 							<td>${status.count }</td>
 							<td style = "text-align:left; padding-left:${vo.depth }*20 px">
-								<a href="${pageContext.request.contextPath}/board?a=modifyform&no=${vo.no }">${vo.title }</a></td>
+								<a href="${pageContext.request.contextPath}/board?a=viewform&no=${vo.no }">${vo.title }</a></td>
 							<td>${vo.userName }</td>
 							<td>hit</td>
 							<td>${vo.date }</td>

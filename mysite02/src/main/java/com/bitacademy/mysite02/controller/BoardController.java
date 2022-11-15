@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bitacademy.mysite02.dao.BoardDao;
+import com.bitacademy.mysite02.dao.UserDao;
 import com.bitacademy.mysite02.vo.BoardVo;
+import com.bitacademy.mysite02.vo.UserVo;
 
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -40,8 +42,30 @@ public class BoardController extends HttpServlet {
 			new BoardDao().deleteByNo(no);
 
 			response.sendRedirect("./board");
+		} else if ("viewform".equals(action)) {
+			String sno = request.getParameter("no");
+			Long no = Long.parseLong(sno);
+			
+			BoardVo vo = new BoardDao().findByNo(no);
+			request.setAttribute("BoardVo", vo);
+			
+			request.getRequestDispatcher("WEB-INF/views/board/viewform.jsp").forward(request, response);
 		} else if("modifyform".equals(action)) {
 			request.getRequestDispatcher("WEB-INF/views/board/modifyform.jsp").forward(request, response);
+		} else if("modify".equals(action)) {
+			String title = request.getParameter("title");
+			String contents = request.getParameter("contents");
+			String sno = request.getParameter("no");
+			Long no = Long.parseLong(sno);
+			
+			BoardVo vo = new BoardVo();
+			vo.setTitle(title);
+			vo.setContents(contents);
+			vo.setNo(no);
+			
+			new BoardDao().update(vo); 
+			
+			response.sendRedirect(request.getContextPath() + "/board"); 
 		} else {
 			List<BoardVo> list = new BoardDao().findAll();
 			
