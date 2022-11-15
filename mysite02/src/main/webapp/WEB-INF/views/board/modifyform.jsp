@@ -2,6 +2,7 @@
 <%@ taglib uri= "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri= "http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri= "http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,8 +38,10 @@
 							</td>
 						</tr>
 					</table>
+					
+					<!-- login한 사람에게만 보이도록 -->
 					<div class="bottom">
-						<a href="">취소</a>
+						<a href="./board">취소</a>
 						<input type="submit" value="수정">
 					</div>
 				</form>				
