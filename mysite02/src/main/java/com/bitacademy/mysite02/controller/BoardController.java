@@ -40,6 +40,8 @@ public class BoardController extends HttpServlet {
 			new BoardDao().deleteByNo(no);
 
 			response.sendRedirect("./board");
+		} else if("modifyform".equals(action)) {
+			request.getRequestDispatcher("WEB-INF/views/board/modifyform.jsp").forward(request, response);
 		} else {
 			List<BoardVo> list = new BoardDao().findAll();
 			
