@@ -14,16 +14,16 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-	@RequestMapping
+	@RequestMapping("")
 	public String list(Model model) {
 		model.addAttribute("list", boardService.findContentsList());
 		
-		return "/board/list";
+		return "board/list";
 	}
 	
-	@RequestMapping(value = "/wirte", method = RequestMethod.GET)
+	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String addContents() {
-		return "guestbook/write";
+		return "board/write";
 	}
 }
 
