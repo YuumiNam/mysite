@@ -37,8 +37,8 @@
 				</table>
 				<div class="bottom">
 					<a href="./board">글목록</a>
-					<c:if test = "${authUser.no == BoardVo.userNo }">
-						<a href="./board?a=modifyform&no=${param.no }">글수정</a>
+					<c:if test = "${not empty authUser}">
+					<a href="./board?a=modifyform&no=${param.no }">글수정</a> <!-- authuser가 not empty일때만 보이도록 -->
 					</c:if>
 				</div>
 			</div>

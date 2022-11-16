@@ -39,11 +39,9 @@
 							<td style = "text-align:left; padding-left:${vo.depth }*20 px">
 								<a href="${pageContext.request.contextPath}/board?a=viewform&no=${vo.no }">${vo.title }</a></td>
 							<td>${vo.userName }</td>
-							<td>${vo.hit }</td>
+							<td>hit</td>
 							<td>${vo.date }</td>
-							<c:if test = "${authUser.no == vo.userNo }">
-								<td><a href="${pageContext.request.contextPath}/board?a=delete&no=${vo.no }" class="del">삭제</a></td>
-							</c:if>
+							<td><a href="${pageContext.request.contextPath}/board?a=delete&no=${vo.no }" class="del">삭제</a></td>
 						</tr>
 					</c:forEach>
 					

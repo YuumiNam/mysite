@@ -30,7 +30,7 @@ public class BoardDao {
 			stmt = conn.createStatement(); // row값
 
 			// 4. SQL 실행
-			String sql = "select a.no, a.title, b.name, a.hit, date_format(a.date, '%Y/%m/%d %H:%i:%s') as date "
+			String sql = "select a.no, a.title, b.name, a.hit, date_format(a.date, '%Y/%m/%d %H:%i:%s') as date, a.user_no "
 					+ " from board a, user b" + " where a.user_no = b.no" + " order by group_no desc, order_no asc"; // 쿼리
 
 			rs = stmt.executeQuery(sql); // row값에 쿼리를 대입시킨것 (한줄만)
@@ -42,6 +42,7 @@ public class BoardDao {
 				String name = rs.getString(3);
 				Long hit = rs.getLong(4);
 				String date = rs.getString(5);
+				Long userno = rs.getLong(6);
 
 				BoardVo vo = new BoardVo();
 				vo.setNo(no);
@@ -49,6 +50,7 @@ public class BoardDao {
 				vo.setUserName(name);
 				vo.setHit(hit);
 				vo.setDate(date);
+				vo.setUserNo(userno);
 
 				result.add(vo);
 			}
@@ -178,7 +180,7 @@ public class BoardDao {
 			conn = getConnection();
 
 			// 3. statement 준비
-			String sql = "select title, contents from board where no = ?"; // 쿼리
+			String sql = "select title, contents, hit , user_no from board where no = ?"; // 쿼리
 
 			pstmt = conn.prepareStatement(sql); // row값
 
@@ -192,10 +194,14 @@ public class BoardDao {
 			if (rs.next()) {
 				String title = rs.getString(1);
 				String contents = rs.getString(2);
+				Long hit = rs.getLong(3);
+				Long userno = rs.getLong(4);
 
 				result = new BoardVo();
 				result.setTitle(title);
 				result.setContents(contents);
+				result.setHit(hit);
+				result.setUserNo(userno);
 			}
 
 		} catch (SQLException e) {
@@ -262,6 +268,50 @@ public class BoardDao {
 
 	}
 
+	// 조회수
+	public boolean hit(BoardVo vo) {
+		boolean result = false;
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			conn = getConnection();
+
+			// 3. statement 준비
+			String sql = "update board set hit = (SELECT(max(hit)+1)) where no = ?";
+
+			pstmt = conn.prepareStatement(sql); // row값
+
+			// 4. Binding
+			pstmt.setLong(1, vo.getNo());
+
+			// 4. SQL 실행
+			int count = pstmt.executeUpdate(); //
+
+			// 5. 결과처리
+			result = count == 1;
+
+		} catch (SQLException e) {
+			System.out.println("Error:" + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+
+	}
+	
 	// 예외처리
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
