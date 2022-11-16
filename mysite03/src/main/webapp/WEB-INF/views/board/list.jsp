@@ -39,9 +39,11 @@
 							<td style = "text-align:left; padding-left:${vo.depth }*20 px">
 								<a href="${pageContext.request.contextPath}/board?a=viewform&no=${vo.no }">${vo.title }</a></td>
 							<td>${vo.userName }</td>
-							<td>hit</td>
+							<td>${vo.hit }</td>
 							<td>${vo.date }</td>
-							<td><a href="${pageContext.request.contextPath}/board?a=delete&no=${vo.no }" class="del">삭제</a></td>
+							<c:if test = "${authUser.no == vo.userNo }">
+								<td><a href="${pageContext.request.contextPath}/board?a=delete&no=${vo.no }" class="del">삭제</a></td>
+							</c:if>
 						</tr>
 					</c:forEach>
 					
@@ -63,7 +65,7 @@
 				<!-- login한 사람에게만 보이도록 -->
 				<c:if test = "${not empty authUser}">
 					<div class="bottom">
-						<a href="${pageContext.request.contextPath}/board?a=writeform" id="new-book">글쓰기</a>
+						<a href="${pageContext.request.contextPath}/board/write" id="new-book">글쓰기</a>
 					</div>
 				</c:if>
 							
