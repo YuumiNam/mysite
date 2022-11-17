@@ -40,11 +40,11 @@ public class UserRepository {
 			pstmt.setString(1, email);
 			pstmt.setString(2, password);
 			
-			// 5. 실행
+			// 5. 쿼리 실행
 			rs = pstmt.executeQuery();
 			
 			
-			// 6. 결과처리
+			// 6. result 처리
 			if(rs.next()) {
 				Long no = rs.getLong(1);
 				String name = rs.getString(2);
@@ -94,11 +94,11 @@ public class UserRepository {
 			// 4. binding
 			pstmt.setLong(1, no);
 			
-			// 5. 실행
+			// 5. 쿼리 실행
 			rs = pstmt.executeQuery();
 			
 			
-			// 6. 결과처리
+			// 6. result 처리
 			if(rs.next()) {
 				String name = rs.getString(1);
 				String email = rs.getString(2);
@@ -152,10 +152,10 @@ public class UserRepository {
 			pstmt.setString(3, vo.getPassword());
 			pstmt.setString(4, vo.getGender());
 
-			// 5. 실행
+			// 5. 쿼리 실행
 			int count = pstmt.executeUpdate(); // executeUpdate()는 insert등은 반영된 건수를 반환, create&drop은 -1을 반환
 
-			// 5. 결과처리
+			// 5. result 처리
 			result = count == 1; // count == 1 << true
 
 		} catch (SQLException e) {
@@ -212,10 +212,10 @@ public class UserRepository {
 				pstmt.setLong(4, vo.getNo());
 			}
 			
-			//4. SQL 실행
+			//4. 쿼리 실행
 			int count = pstmt.executeUpdate(); // 
 			
-			//5. 결과처리
+			//5. result 처리
 			result = count == 1;
 			
 		} catch (SQLException e) {
