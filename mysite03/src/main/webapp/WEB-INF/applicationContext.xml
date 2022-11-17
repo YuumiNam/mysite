@@ -22,9 +22,14 @@
 	
 	<!-- MyBatis SqlSessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
-		<property name="dataSource" ref="dataSource" /> 
-		<property name="configLocation" value="classpath:mybatis/configuration.xml" /> 
+		<property name="dataSource" ref="dataSource" /> <!-- ref = "Connection Pool DataSource의 id" --> 
+		<property name="configLocation" value="classpath:mybatis/configuration.xml" /> <!-- src/main/resources에 configuration.xml 생성해주기 -->
 	</bean>	
+	
+	<!-- MyBatis SqlSessionTemplate --> 
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
 	
 	<context:annotation-config />
 
