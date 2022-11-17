@@ -25,7 +25,7 @@ public class BoardService {
 	}
 	
 	public void addContents(BoardVo vo) {
-		
+		boardRepository.write(vo);
 	}
 	
 	public BoardVo findContents(Long no) {

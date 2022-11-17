@@ -1,11 +1,13 @@
 package com.bitacademy.mysite.repository;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bitacademy.mysite.exception.UserRepositoryException;
@@ -13,6 +15,8 @@ import com.bitacademy.mysite.vo.UserVo;
 
 @Repository
 public class UserRepository {
+	@Autowired
+	private DataSource dataSource;
 	
 	// 로그인
 	public UserVo findByEmailAndPassword(String email, String password) throws UserRepositoryException{
@@ -25,7 +29,7 @@ public class UserRepository {
 		
 		try {
 			// 1, 2
-			conn = getConnection();
+			conn = dataSource.getConnection();
 
 			// 3. statement 준비
 			String sql = "select no, name from user where email = ? and password = ?"; // 쿼리
@@ -80,7 +84,7 @@ public class UserRepository {
 		
 		try {
 			// 1, 2
-			conn = getConnection();
+			conn = dataSource.getConnection();
 
 			// 3. statement 준비
 			String sql = "select name, email, gender from user where no = ?"; // 쿼리
@@ -135,7 +139,7 @@ public class UserRepository {
 
 		try {
 			// 1, 2
-			conn = getConnection();
+			conn = dataSource.getConnection();
 
 			// 3. statement 준비
 			String sql = "insert into user values(null, ?, ?, ?, ?, now())"; // 쿼리
@@ -183,7 +187,7 @@ public class UserRepository {
 		
 		try {
 			
-			conn = getConnection();
+			conn = dataSource.getConnection();
 			
 			
 			//3. statement 준비
@@ -232,24 +236,5 @@ public class UserRepository {
 		return result;
 	
 	}
-	
-	// 예외처리
-	private Connection getConnection() throws SQLException {
-		Connection conn = null;
-
-		try {
-			// 1. JDBC Driver Class Loading
-			Class.forName("org.mariadb.jdbc.Driver");
-
-			// 2. 연결하기
-			String url = "jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8";
-			conn = DriverManager.getConnection(url, "webdb", "webdb");
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패:" + e);
-		}
-
-		return conn;
-	}
-
 
 }
