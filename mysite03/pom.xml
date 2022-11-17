@@ -38,6 +38,13 @@
 			<artifactId>spring-web</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
+		<!-- Apache Common DBCP -->
+		<dependency>
+		    <groupId>commons-dbcp</groupId>
+		    <artifactId>commons-dbcp</artifactId>
+		    <version>1.4</version>
+		</dependency>
 
 		<!-- mariadb jdbc driver -->
 		<dependency>
