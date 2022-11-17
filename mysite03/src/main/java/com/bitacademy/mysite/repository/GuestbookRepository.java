@@ -9,72 +9,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bitacademy.mysite.vo.GuestbookVo;
 
 @Repository
 public class GuestbookRepository {
+	@Autowired
+	private SqlSession sqlSession;
+	
 	// findAll()
 	public List<GuestbookVo> findAll() {
-		List<GuestbookVo> result = new ArrayList<>();
+		List<GuestbookVo> result = sqlSession.selectList("guestbook.findAll");
 	
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		
-		try {
-			
-			// 1, 2
-			conn = getConnection();
-			
-			// 3. statement
-			stmt = conn.createStatement(); // row값
-			
-			// 4. SQL 실행
-			String sql = 
-					"select no, name, contents, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as date" +
-					" from guestbook" + 
-					" order by date asc"; // 쿼리
-			
-			rs = stmt.executeQuery(sql); // row값에 쿼리를 대입시킨것 (한줄만)
-			
-			// 5. 결과처리
-			while(rs.next()) { // 한줄이 아닌 전체를 뽑음
-				Long no = rs.getLong(1);
-				String name = rs.getString(2);
-				String contents = rs.getString(3);
-				String date = rs.getString(4);
-				
-				GuestbookVo vo = new GuestbookVo();
-				vo.setNo(no);
-				vo.setName(name);
-				vo.setContents(contents);
-				vo.setDate(date);
-				
-				result.add(vo);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("Error:" + e);
-		} finally {
-			try {
-				if(rs != null) {
-					rs.close();
-				}
-				
-				if(stmt != null) {
-					stmt.close();
-				}
-				
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}		
-		
 		return result;
 	}
 	
