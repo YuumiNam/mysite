@@ -9,4 +9,11 @@
 				order by date asc
 		]]>
 	</select>
+	
+	<insert id="insert" parameterType="guestbookvo">
+		<![CDATA[
+			insert into guestbook 
+				values(null, #{name }, #{password }, #{contents },now())
+		]]>
+	</insert>
 </mapper>

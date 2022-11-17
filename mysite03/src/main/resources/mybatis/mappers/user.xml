@@ -4,7 +4,8 @@
 <mapper namespace="user">
 	<insert id="insert" parameterType="uservo">
 		<![CDATA[
-			insert into user values(null, #{name }, #{email }, #{password }, #{gender }, now())
+			insert into user 
+				values(null, #{name }, #{email }, #{password }, #{gender }, now())
 		]]>
 	</insert>
 	
@@ -16,7 +17,9 @@
 	
 	<select id="findByNo" resultType="uservo" parameterType="long"> <!-- parameter값이 두개 이상일때에는 map으로 잡는다 -->
 		<![CDATA[
-			select name, email, gender from user where no = #{no } 
+			select name, email, gender 
+				from user 
+				where no = #{no } 
 		]]> <!-- 기본타입은 변수설정을 할 수 없기때문에 잡아줄수가없지만, 어짜피 한개밖에없기때문에 그냥 써주면 된다. -->
 	</select>
 	
@@ -24,12 +27,16 @@
 		<choose>
 			<when test='password == ""'>
 				<![CDATA[
-				update user set name = #{name }, gender = #{gender } where no = #{no }
+				update user 
+					set name = #{name }, gender = #{gender } 
+					where no = #{no }
 			]]>
 			</when>
 			<otherwise>
 				<![CDATA[
-				update user set name = #{name }, password = #{password }, gender = #{gender } where no = #{no }
+				update user 
+					set name = #{name }, password = #{password }, gender = #{gender } 
+					where no = #{no }
 			]]>
 			</otherwise>
 		</choose>
