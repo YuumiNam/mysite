@@ -20,7 +20,7 @@ public class GuestbookRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	// findAll()
+	// 글 목록
 	public List<GuestbookVo> findAll() {
 		List<GuestbookVo> result = sqlSession.selectList("guestbook.findAll");
 	
@@ -28,57 +28,13 @@ public class GuestbookRepository {
 	}
 	
 	
-	// insert()
+	// 글 작성
 	public Boolean insert(GuestbookVo vo) {
-		boolean result = false;
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			// 1, 2
-			conn = getConnection();
-			
-			
-			// 3. statement 준비
-			String sql = "insert into guestbook values(null, ?, ?, ?,now())"; // 쿼리
-			
-			
-			pstmt = conn.prepareStatement(sql); // row값
-			
-			
-			// 4. binding
-			pstmt.setString(1, vo.getName());
-			pstmt.setString(2, vo.getPassword());
-			pstmt.setString(3, vo.getContents());
-			
-			
-			// 5. 실행
-			int count = pstmt.executeUpdate(); // executeUpdate()는 insert등은 반영된 건수를 반환, create&drop은 -1을 반환
-			
-			//5. 결과처리
-			result = count == 1; // count == 1 << true
-			
-			
-		} catch (SQLException e) {
-			System.out.println("Error:" + e);
-		} finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return result;
+		int count = sqlSession.insert("guestbook.insert", vo);
+		return count == 1;
 	}
 	
-	//delete by password
+	// 글 삭제
 	public Boolean deleteByNoAndPassword(Long no, String password) {
 		boolean result = false;
 		
