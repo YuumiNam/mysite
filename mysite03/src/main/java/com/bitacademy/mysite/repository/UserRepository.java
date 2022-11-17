@@ -3,25 +3,18 @@ package com.bitacademy.mysite.repository;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.bitacademy.mysite.exception.UserRepositoryException;
 import com.bitacademy.mysite.vo.UserVo;
 
 @Repository
 public class UserRepository {
 	@Autowired
-	private DataSource dataSource;
-	
-	@Autowired
 	private SqlSession sqlSession;
 	
 	// 로그인
-	public UserVo findByEmailAndPassword(String email, String password) throws UserRepositoryException{
+	public UserVo findByEmailAndPassword(String email, String password) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("email", email);
 		map.put("password", password);
