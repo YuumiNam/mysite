@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bitacademy.mysite02.dao.BoardDao;
-import com.bitacademy.mysite02.dao.UserDao;
 import com.bitacademy.mysite02.vo.BoardVo;
-import com.bitacademy.mysite02.vo.UserVo;
 
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

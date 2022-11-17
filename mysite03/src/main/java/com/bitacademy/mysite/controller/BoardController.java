@@ -23,18 +23,32 @@ public class BoardController {
 		return "board/list";
 	}
 	
-	@RequestMapping(value = "/write", method = RequestMethod.GET)
-	public String addContents() {
+	@RequestMapping(value="/write", method=RequestMethod.GET)
+	public String addContents(Long no, Model model) {
+		model.addAttribute("userNo", no);
 		return "board/write";
 	}
 	
-	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String addContents(BoardVo vo) {
-		
-		boardService.addContents(vo);
+	@RequestMapping(value="/write", method=RequestMethod.POST)
+	public String addContents(BoardVo boardVo) {
+		boardService.addContents(boardVo);
 		
 		return "redirect:/board";
 	}
+	
+	@RequestMapping(value="/view", method=RequestMethod.GET)
+	public String view(Long no, Model model) {
+		model.addAttribute("BoardVo", boardService.findContents(no));
+		
+		return "board/view";
+	}
+	
+	@RequestMapping(value="/modify/{no}", method=RequestMethod.GET)
+	public String updateContents(@PathVariable("no") Long no, Model model) {
+		model.addAttribute("no", no);
+		return "board/modify";
+	}
+	
 }
 
 

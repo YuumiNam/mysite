@@ -35,7 +35,6 @@ public class GuestbookController {
 	public String deleteContents(@PathVariable("no") Long no, Model model) {
 		model.addAttribute("no", no);
 		
-		System.out.println(no);
 		return "guestbook/delete";
 	}
 	

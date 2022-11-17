@@ -1,13 +1,8 @@
 package com.bitacademy.mysite.repository;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,70 +31,13 @@ public class GuestbookRepository {
 	
 	// 글 삭제
 	public Boolean deleteByNoAndPassword(Long no, String password) {
-		boolean result = false;
+		Map<String, Object> map = new HashMap<>();
 		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
+		map.put("no", no);
+		map.put("password", password);
 		
-		try {
-			// 1, 2
-			conn = getConnection();
-			
-			
-			// 3. statement 준비
-			String sql = 
-					"delete" +  
-					" from guestbook" +
-				    " where no = ? and password = ?"; // 쿼리
-			
-			pstmt = conn.prepareStatement(sql); // row값
-	
-			// 4. Binding
-			pstmt.setLong(1, no);
-			pstmt.setString(2, password);
-			
-			// 5. SQL 실행
-			int count = pstmt.executeUpdate(); // 
-			
-			// 6. 결과처리
-			result = count == 1;
-			
-			
-		} catch (SQLException e) {
-			System.out.println("Error:" + e);
-		} finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	
-		return result;
+		int count = sqlSession.delete("guestbook.deleteByNoAndPassword", map);
 		
-	}
-	
-	// 예외처리
-	private Connection getConnection() throws SQLException {
-		Connection conn = null;
-		
-		try {
-			//1. JDBC Driver Class Loading
-			Class.forName("org.mariadb.jdbc.Driver");
-			
-			
-			//2. 연결하기
-			String url = "jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8";
-			conn = DriverManager.getConnection(url, "webdb", "webdb");
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패:" + e);
-		}
-			
-		return conn;
+		return count == 1;
 	}
 }

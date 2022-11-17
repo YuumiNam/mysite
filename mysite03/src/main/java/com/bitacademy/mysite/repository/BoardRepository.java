@@ -80,7 +80,7 @@ public class BoardRepository {
 		return result;
 	}
 
-	// write
+	// 글 쓰기
 	public Boolean write(BoardVo vo) {
 		boolean result = false;
 

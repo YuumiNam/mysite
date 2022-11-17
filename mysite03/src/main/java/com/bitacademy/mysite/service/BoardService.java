@@ -29,7 +29,7 @@ public class BoardService {
 	}
 	
 	public BoardVo findContents(Long no) {
-		return null;
+		return boardRepository.findByNo(no);
 	}
 	
 	public BoardVo findContents(Long no, Long userNo) {
