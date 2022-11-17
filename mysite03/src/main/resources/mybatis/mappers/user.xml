@@ -19,4 +19,20 @@
 			select name, email, gender from user where no = #{no } 
 		]]> <!-- 기본타입은 변수설정을 할 수 없기때문에 잡아줄수가없지만, 어짜피 한개밖에없기때문에 그냥 써주면 된다. -->
 	</select>
+	
+	<update id="update" parameterType="uservo">
+		<choose>
+			<when test='password == ""'>
+				<![CDATA[
+				update user set name = #{name }, gender = #{gender } where no = #{no }
+			]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+				update user set name = #{name }, password = #{password }, gender = #{gender } where no = #{no }
+			]]>
+			</otherwise>
+		</choose>
+	</update>
+	
 </mapper>
