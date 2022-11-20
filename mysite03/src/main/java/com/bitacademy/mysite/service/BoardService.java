@@ -37,6 +37,7 @@ public class BoardService {
 	}
 	
 	public void updateContents(BoardVo vo) {
+		boardRepository.update(vo);
 	}
 	
 	public void deleteContents(Long no, Long userNo) {

@@ -26,6 +26,7 @@ public class BoardController {
 	@RequestMapping(value="/write", method=RequestMethod.GET)
 	public String addContents(Long no, Model model) {
 		model.addAttribute("userNo", no);
+		
 		return "board/write";
 	}
 	
@@ -46,7 +47,15 @@ public class BoardController {
 	@RequestMapping(value="/modify/{no}", method=RequestMethod.GET)
 	public String updateContents(@PathVariable("no") Long no, Model model) {
 		model.addAttribute("no", no);
+		
 		return "board/modify";
+	}
+	
+	@RequestMapping(value="/modify/{no}", method=RequestMethod.POST)
+	public String updateContents(@PathVariable("no") Long no, BoardVo vo) {
+		boardService.updateContents(vo);
+		
+		return "redirect:/board";
 	}
 	
 }
