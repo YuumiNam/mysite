@@ -15,6 +15,11 @@ public class AuthInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
+		// 0. handler 종류 확인 (이미지파일 같은 것은 인증이 필요없음)
+		if(handler instanceof HandlerMethod == false) {
+			return true;
+		}
+		
 		// 1. casting
 		HandlerMethod handlerMethod = (HandlerMethod)handler;
 		

@@ -1,7 +1,5 @@
 package com.bitacademy.mysite.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bitacademy.mysite.security.Auth;
+import com.bitacademy.mysite.security.AuthUser;
 import com.bitacademy.mysite.service.UserService;
 import com.bitacademy.mysite.vo.UserVo;
 
@@ -41,14 +40,8 @@ public class UserController {
 	
 	@Auth // << login한 사람만 쓸수있게하는 나만의 annotation
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public String update(HttpSession session, Model model) {
-		// Access Control (사용자가 로그인도 안했는데 logout창으로 들어왔을때를 대비) << AuthInterceptor가 있으면 필요x
-		 UserVo authUser = (UserVo)session.getAttribute("authUser"); // << 하지만 변수 authUser는 써야하기때문에 없앨수가없음 
-		 //if(authUser == null) {
-		 //	return "redirect:/";
-		 // }
-		//////////////////
-			
+	public String update(Model model, @AuthUser UserVo authUser) { // << @AuthUser Access Control을 위한 나만의 annotation
+		
 		UserVo userVo = userService.findUser(authUser.getNo());
 		model.addAttribute("userVo",userVo);
 		
@@ -57,13 +50,7 @@ public class UserController {
 	
 	@Auth // << login한 사람만 쓸수있게하는 나만의 annotation
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(HttpSession session, UserVo userVo) {
-		// Access Control (사용자가 로그인도 안했는데 logout창으로 들어왔을때를 대비) << AuthInterceptor가 있으면 필요x
-		UserVo authUser = (UserVo)session.getAttribute("authUser"); // << 하지만 변수 authUser는 써야하기때문에 없앨수가없음
-		// if(authUser == null) {
-		// 	return "redirect:/";
-		// }
-		//////////////////
+	public String update(UserVo userVo, @AuthUser UserVo authUser) { // << @AuthUser Access Control을 위한 나만의 annotation
 		
 		userVo.setNo(authUser.getNo()); // userVo에는 no가 설정이 안되어있기때문에 authUser에서 no를 갖고옴
 										// param에서 no를 갖고오려고하지말기! 해킹의 위험이있음
