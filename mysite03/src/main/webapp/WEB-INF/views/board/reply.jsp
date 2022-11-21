@@ -12,36 +12,38 @@
 </head>
 <body>
 	<div id="container">
-	
+		
 		<!-- header -->
 		<c:import url = "/WEB-INF/views/includes/header.jsp" />
 
 		<div id="content">
-			<div id="board" class="board-form">
-				<table class="tbl-ex">
-					<tr>
-						<th colspan="2">글보기</th>
-					</tr>
-					<tr>
-						<td class="label">제목</td>
-						<td>${BoardVo.title }</td>
-					</tr>
-					<tr>
-						<td class="label">내용</td>
-						<td>
-							<div class="view-content">
-								${BoardVo.contents }
-							</div>
-						</td>
-					</tr>
-				</table>
-				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board">글목록</a>
-					<c:if test = "${authUser.no == BoardVo.userNo }">
-						<a href="${pageContext.request.contextPath }/board/modify/${param.no }">글수정</a>
-						<a href="${pageContext.request.contextPath }/board/reply/${param.no }">답글</a>
-					</c:if>
-				</div>
+			<div id="board">
+				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board/reply/${no }">
+					<table class="tbl-ex">
+						<tr>
+							<th colspan="2">답글</th>
+						</tr>
+						<tr>
+							<td class="label">제목</td>
+							<td><input type="text" name="title" value=""></td>
+						</tr>
+						<tr>
+							<td class="label">내용</td>
+							<td>
+								<textarea id="content" name="contents">수정해야 할 글은 고대로 
+이렇게 textarea에 뿌려야 합니다.
+개행문자 변경도 하지마세요.
+하하하하하
+즐건 코딩 되세요~~~~</textarea>
+							</td>
+						</tr>
+					</table>
+					
+					<div class="bottom">
+						<a href="${pageContext.request.contextPath }/board">취소</a>
+						<input type="submit" value="답글작성">
+					</div>
+				</form>				
 			</div>
 		</div>
 		

@@ -19,7 +19,7 @@ public class GuestbookController {
 	
 	@RequestMapping
 	public String getContentsList(Model model) {
-		model.addAttribute("list",guestbookService.getContentsList());
+		model.addAttribute("list", guestbookService.getContentsList());
 		
 		return "guestbook/list";
 	}

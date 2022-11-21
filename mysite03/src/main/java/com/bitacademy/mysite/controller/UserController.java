@@ -40,7 +40,7 @@ public class UserController {
 	
 	@Auth // << login한 사람만 쓸수있게하는 나만의 annotation
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public String update(Model model, @AuthUser UserVo authUser) { // << @AuthUser Access Control을 위한 나만의 annotation
+	public String update(Model model, @AuthUser UserVo authUser) { // << authUser라는 Parameter를 쓰기위한 나만의 annotation
 		
 		UserVo userVo = userService.findUser(authUser.getNo());
 		model.addAttribute("userVo",userVo);
@@ -50,7 +50,7 @@ public class UserController {
 	
 	@Auth // << login한 사람만 쓸수있게하는 나만의 annotation
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(UserVo userVo, @AuthUser UserVo authUser) { // << @AuthUser Access Control을 위한 나만의 annotation
+	public String update(UserVo userVo, @AuthUser UserVo authUser) { // << authUser라는 Parameter를 쓰기위한 나만의 annotation
 		
 		userVo.setNo(authUser.getNo()); // userVo에는 no가 설정이 안되어있기때문에 authUser에서 no를 갖고옴
 										// param에서 no를 갖고오려고하지말기! 해킹의 위험이있음

@@ -125,8 +125,8 @@ public class BoardRepository {
 		return result;
 	}
 
-	// deleteByNo
-	public Boolean deleteByNo(Long no) {
+	// deleteByNoAndUserno
+	public Boolean deleteByNoAndUserno(Long no, Long userno) {
 		boolean result = false;
 
 		Connection conn = null;
@@ -137,12 +137,13 @@ public class BoardRepository {
 			conn = getConnection();
 
 			// 3. statement 준비
-			String sql = "delete" + " from board" + " where no = ?";
+			String sql = "delete from board where no = ? and user_no = ?";
 
 			pstmt = conn.prepareStatement(sql); // row값
 
 			// 4. Binding
 			pstmt.setLong(1, no);
+			pstmt.setLong(2, no);
 
 			// 5. SQL 실행
 			int count = pstmt.executeUpdate(); //

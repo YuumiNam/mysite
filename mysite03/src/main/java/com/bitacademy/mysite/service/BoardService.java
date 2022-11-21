@@ -41,6 +41,7 @@ public class BoardService {
 	}
 	
 	public void deleteContents(Long no, Long userNo) {
+		boardRepository.deleteByNoAndUserno(no, userNo);
 	}
 	
 	

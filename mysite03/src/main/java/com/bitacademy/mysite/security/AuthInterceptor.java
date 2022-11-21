@@ -15,7 +15,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		// 0. handler 종류 확인 (이미지파일 같은 것은 인증이 필요없음)
+		// 0. handler 종류 확인 (이미지파일 같은 것은 인증이 필요없는데 spring-servlet.xml에서 exclude-mapping을 빼먹을수도있으니까)
 		if(handler instanceof HandlerMethod == false) {
 			return true;
 		}

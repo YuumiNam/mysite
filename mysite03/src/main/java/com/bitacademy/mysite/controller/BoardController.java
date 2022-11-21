@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bitacademy.mysite.security.Auth;
 import com.bitacademy.mysite.service.BoardService;
 import com.bitacademy.mysite.vo.BoardVo;
 
@@ -16,7 +17,7 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-	@RequestMapping("")
+	@RequestMapping
 	public String list(Model model) {
 		model.addAttribute("list", boardService.findContentsList());
 		
@@ -37,6 +38,13 @@ public class BoardController {
 		return "redirect:/board";
 	}
 	
+	@RequestMapping(value="/delete/{userno}", method=RequestMethod.POST)
+	public String deleteContents(@PathVariable("userno") Long userNo, Long no) {
+		boardService.deleteContents(no, userNo);
+		
+		return "redirect:/board";
+	}
+	
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public String view(Long no, Model model) {
 		model.addAttribute("BoardVo", boardService.findContents(no));
@@ -44,13 +52,27 @@ public class BoardController {
 		return "board/view";
 	}
 	
+	@RequestMapping(value="/reply/{no}", method=RequestMethod.GET)
+	public String reply(@PathVariable("no") Long no, Model model) {
+		
+		return "board/reply";
+	}
+	
+	@RequestMapping(value="/reply/{no}", method=RequestMethod.POST)
+	public String reply(@PathVariable("no") Long no, BoardVo vo) {
+		boardService.updateContents(vo);
+		
+		return "redirect:/board";
+	}
+	
+	@Auth
 	@RequestMapping(value="/modify/{no}", method=RequestMethod.GET)
 	public String updateContents(@PathVariable("no") Long no, Model model) {
-		model.addAttribute("no", no);
 		
 		return "board/modify";
 	}
 	
+	@Auth
 	@RequestMapping(value="/modify/{no}", method=RequestMethod.POST)
 	public String updateContents(@PathVariable("no") Long no, BoardVo vo) {
 		boardService.updateContents(vo);
