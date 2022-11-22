@@ -1,14 +1,12 @@
 package com.bitacademy.mysite.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,12 +22,12 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public String join() {
+	public String join(@ModelAttribute UserVo userVo) {
 		return "user/join";
 	}
 	
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String join(@Valid UserVo userVo, BindingResult result, Model model) {
+	public String join(@ModelAttribute @Valid UserVo userVo, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			// List<ObjectError> errors = result.getAllErrors();
 			// for(ObjectError error : errors) {
@@ -37,6 +35,8 @@ public class UserController {
 			// }
 			
 			model.addAllAttributes(result.getModel());
+			// @ModelAttribute로 대체가능
+			// model.addAttribute("userVo", userVo);
 			return "user/join";
 		}
 		
