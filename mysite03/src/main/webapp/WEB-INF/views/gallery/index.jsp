@@ -180,6 +180,17 @@
 
 						<a href="${pageContext.request.contextPath }/gallery/delete/15"
 						class="del-button" title="삭제">삭제</a></li>
+				
+				
+					<c:forEach items='${list }' var='vo' >
+						<li><a
+						href="${pageContext.request.contextPath }${url }" 
+						data-lightbox="gallery" class="image" 
+						style="background-image:url('${pageContext.request.contextPath }${url }')">&nbsp;</a>
+
+						<a href="${pageContext.request.contextPath }/gallery/delete/${vo.no}" 
+						class="del-button" title="삭제">삭제</a></li>
+					</c:forEach>
 				</ul>
 			</div>
 

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bitacademy.mysite.service.FileUploadService;
@@ -21,17 +22,20 @@ public class GalleryController {
 	
 	@RequestMapping
 	public String index(Model model) {
+		model.addAttribute("list", galleryService.getContentsList());
+		
 		return "gallery/index";
 	}
 	
 	@RequestMapping("/upload")
-	public String upload(GalleryVo galleryVo, MultipartFile multipartFile, Model model) {
-		
+	public String upload(GalleryVo vo, @RequestParam("file") MultipartFile multipartFile, Model model) {
 		String url = fileUploadService.restore(multipartFile);
-//		galleryService.saveImages(galleryVo);
 		
 		model.addAttribute("url", url);
+		vo.setUrl(url);
+		galleryService.saveImages(vo);
 		
+		System.out.println(vo);
 		System.out.println(url);
 		return "redirect:/gallery";
 	}

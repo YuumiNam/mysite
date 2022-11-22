@@ -21,7 +21,7 @@
 	</mvc:annotation-driven>
 	
 	<!-- MVC Resource Mapping --> <!-- 저장한 파일과 url을 맵핑 -->
-	<mvc:resources mapping="/images/**" location="file:/mysite-uploads/" />
+	<mvc:resources mapping="gallery/images/**" location="file:/mysite-uploads/" />
 	
 	<!-- Multipart Resolver -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
