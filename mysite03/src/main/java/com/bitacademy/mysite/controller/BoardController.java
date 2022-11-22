@@ -24,6 +24,7 @@ public class BoardController {
 		return "board/list";
 	}
 	
+	@Auth
 	@RequestMapping(value="/write", method=RequestMethod.GET)
 	public String addContents(Long no, Model model) {
 		model.addAttribute("userNo", no);
@@ -31,6 +32,7 @@ public class BoardController {
 		return "board/write";
 	}
 	
+	@Auth
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String addContents(BoardVo boardVo) {
 		boardService.addContents(boardVo);
@@ -38,6 +40,7 @@ public class BoardController {
 		return "redirect:/board";
 	}
 	
+	@Auth
 	@RequestMapping(value="/delete/{userno}", method=RequestMethod.POST)
 	public String deleteContents(@PathVariable("userno") Long userNo, Long no) {
 		boardService.deleteContents(no, userNo);
@@ -52,12 +55,14 @@ public class BoardController {
 		return "board/view";
 	}
 	
+	@Auth
 	@RequestMapping(value="/reply/{no}", method=RequestMethod.GET)
 	public String reply(@PathVariable("no") Long no, Model model) {
 		
 		return "board/reply";
 	}
 	
+	@Auth
 	@RequestMapping(value="/reply/{no}", method=RequestMethod.POST)
 	public String reply(@PathVariable("no") Long no, BoardVo vo) {
 		boardService.updateContents(vo);
@@ -67,7 +72,7 @@ public class BoardController {
 	
 	@Auth
 	@RequestMapping(value="/modify/{no}", method=RequestMethod.GET)
-	public String updateContents(@PathVariable("no") Long no, Model model) {
+	public String updateContents(@PathVariable("no") Long no) {
 		
 		return "board/modify";
 	}

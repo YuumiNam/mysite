@@ -2,6 +2,7 @@
 <%@ taglib uri= "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri= "http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri= "http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %> <!-- 에러 발생시 메세지 출력 -->
 
 <!DOCTYPE html>
 <html>
@@ -22,6 +23,13 @@
 				<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user/join">
 					<label class="block-label" for="name">이름</label>
 					<input id="name" name="name" type="text" value="">
+					<p style="text-align:left; padding:2px 0 2px 0; color:red">
+					<spring:hasBindErrors name="userVo"> <!-- 에러가 발생한 경우에만 들어오는거 -->
+						<c:if test="${errors.hasFieldErrors('name') }">
+							<strong>${errors.getFieldError('name').defaultMessage }</strong>
+						</c:if>
+					</spring:hasBindErrors>
+					</p>
 
 					<label class="block-label" for="email">이메일</label>
 					<input id="email" name="email" type="text" value="">
