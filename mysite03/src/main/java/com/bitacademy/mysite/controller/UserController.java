@@ -29,10 +29,10 @@ public class UserController {
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(@ModelAttribute @Valid UserVo userVo, BindingResult result, Model model) {
 		if(result.hasErrors()) {
-			// List<ObjectError> errors = result.getAllErrors();
-			// for(ObjectError error : errors) {
-			// 	System.out.println(error);
-			// }
+			 // List<ObjectError> errors = result.getAllErrors();
+			 // for(ObjectError error : errors) {
+			 //	System.out.println(error);
+			 // }
 			
 			model.addAllAttributes(result.getModel());
 			// @ModelAttribute로 대체가능
