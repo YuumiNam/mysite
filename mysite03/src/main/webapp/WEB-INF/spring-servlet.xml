@@ -23,7 +23,7 @@
 	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
 	<mvc:default-servlet-handler/>
 	
-	<!-- interceptors -->
+	<!-- Interceptors -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/auth" />
@@ -43,14 +43,24 @@
 			<bean class="com.bitacademy.mysite.security.AuthInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-
+	
+	<!--  Message Sourse -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	   <property name="basenames">
+	      <list>
+			<value>messages/messages_ko</value>
+	      </list>
+	   </property>
+	</bean>
+	
 	<!-- ViewResolver -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	   <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 	   <property name="prefix" value="/WEB-INF/views/" />
 	   <property name="suffix" value=".jsp" />
 	</bean>
-
+	
+	<!-- Annotation Configuration : Auto Bean Scanning -->
 	<context:annotation-config />
 	<context:component-scan base-package="com.bitacademy.mysite.controller, com.bitacademy.mysite.exception" />
 
