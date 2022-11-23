@@ -48,6 +48,13 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
+		<!-- spring Aspect -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
 		<!-- Spring JDBC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
