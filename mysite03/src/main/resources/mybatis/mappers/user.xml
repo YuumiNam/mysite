@@ -5,7 +5,7 @@
 	<insert id="insert" parameterType="uservo">
 		<![CDATA[
 			insert into user 
-				values(null, #{name }, #{email }, #{password }, #{gender }, now())
+				values(null, #{name }, #{email }, #{password }, #{gender }, now(), 'user')
 		]]>
 		<selectKey keyProperty="no" resultType="Long" order="AFTER"> <!-- no가 null인 상태인데 no의 값을 쓰고싶을때.... selectKey는 insert할때만 쓸수있음!! 그냥 insert할때에는 기본으로 넣어주자 -->
 			<![CDATA[
@@ -16,7 +16,9 @@
 	
 	<select id="findByEmailAndPassword" resultType="uservo" parameterType="map"> <!-- parameter값이 두개 이상일때에는 map으로 잡는다 -->
 		<![CDATA[
-			select no, name from user where email = #{email } and password = #{password }
+			select no, name, role 
+				from user 
+				where email = #{email } and password = #{password }
 		]]>
 	</select>
 	
