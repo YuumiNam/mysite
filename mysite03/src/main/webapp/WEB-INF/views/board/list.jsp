@@ -37,12 +37,15 @@
 						<tr>
 							<td>${status.count }</td>
 							<td style = "text-align:left; padding-left:${vo.depth }*20 px">
+								<c:if test="${vo.depth != 0}">
+									<img src='${pageContext.request.contextPath }/assets/images/reply.png' />
+								</c:if>
 								<a href="${pageContext.request.contextPath}/board/view?no=${vo.no }">${vo.title }</a></td>
 							<td>${vo.userName }</td>
 							<td>${vo.hit }</td>
 							<td>${vo.date }</td>
 							<c:if test = "${authUser.no == vo.userNo }">
-								<td><a href="${pageContext.request.contextPath}/board/delete/${vo.userNo}" class="del">삭제</a></td>
+								<td><a href="${pageContext.request.contextPath}/board/delete/${vo.no}/${authUser.no }" class="del">삭제</a></td>
 							</c:if>
 						</tr>
 					</c:forEach>

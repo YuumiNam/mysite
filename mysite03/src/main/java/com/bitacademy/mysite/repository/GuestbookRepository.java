@@ -18,7 +18,7 @@ public class GuestbookRepository {
 	// 글 목록
 	public List<GuestbookVo> findAll() {
 		List<GuestbookVo> result = sqlSession.selectList("guestbook.findAll");
-	
+		
 		return result;
 	}
 	

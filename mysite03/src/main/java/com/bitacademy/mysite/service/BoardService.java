@@ -44,6 +44,13 @@ public class BoardService {
 		boardRepository.deleteByNoAndUserno(no, userNo);
 	}
 	
+	public void addHit(BoardVo vo) {
+		boardRepository.addHit(vo);
+	}
+	
+	public void replyContents(BoardVo vo) {
+		boardRepository.reply(vo);
+	}
 	
 }
 

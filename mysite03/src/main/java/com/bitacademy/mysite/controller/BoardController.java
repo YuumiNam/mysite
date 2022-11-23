@@ -21,6 +21,7 @@ public class BoardController {
 	public String list(Model model) {
 		model.addAttribute("list", boardService.findContentsList());
 		
+		// System.out.println(boardService.findContentsList());
 		return "board/list";
 	}
 	
@@ -41,32 +42,38 @@ public class BoardController {
 	}
 	
 	@Auth
-	@RequestMapping(value="/delete/{userno}", method=RequestMethod.POST)
-	public String deleteContents(@PathVariable("userno") Long userNo, Long no) {
+	@RequestMapping("/delete/{no}/{userno}")
+	public String deleteContents(@PathVariable("no") Long no, @PathVariable("userno")Long userNo) {
 		boardService.deleteContents(no, userNo);
 		
+		// System.out.println(no + ":" + userNo);
 		return "redirect:/board";
 	}
 	
 	@RequestMapping(value="/view", method=RequestMethod.GET)
-	public String view(Long no, Model model) {
+	public String view(Long no, Model model, BoardVo vo) {
 		model.addAttribute("BoardVo", boardService.findContents(no));
+		
+		System.out.println(vo);
+		boardService.addHit(vo);
 		
 		return "board/view";
 	}
 	
 	@Auth
-	@RequestMapping(value="/reply/{no}", method=RequestMethod.GET)
-	public String reply(@PathVariable("no") Long no, Model model) {
-		
+	@RequestMapping(value="/reply/{no}/{userno}", method=RequestMethod.GET)
+	public String reply(@PathVariable("no") Long no, @PathVariable("userno") Long userNo, Model model) {
+		model.addAttribute("userno", userNo);
 		return "board/reply";
 	}
 	
 	@Auth
-	@RequestMapping(value="/reply/{no}", method=RequestMethod.POST)
-	public String reply(@PathVariable("no") Long no, BoardVo vo) {
-		boardService.updateContents(vo);
+	@RequestMapping(value="/reply/{no}/{userno}", method=RequestMethod.POST)
+	public String reply(@PathVariable("no") Long no, @PathVariable("userno") Long userNo, BoardVo vo) {
+		vo.setUserNo(userNo);
+		boardService.replyContents(vo);
 		
+		System.out.println(vo);
 		return "redirect:/board";
 	}
 	
