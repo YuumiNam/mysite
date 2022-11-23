@@ -21,17 +21,27 @@ public class GalleryRepository {
 	}
 	
 	// 업로드할 파일 저장
-	public boolean insert(GalleryVo vo) {
-		int count = sqlSession.insert("gallery.insert", vo);
-		
-		return count == 1;
-	}
+	public void insert(GalleryVo vo) {
+	 	sqlSession.insert("gallery.insert", vo);
+	 }
 	
+	// 방법2 (Dao시절 쓰던방법)
+//		public boolean insert(GalleryVo vo) {
+//		int count = sqlSession.insert("gallery.insert", vo);
+//		
+//		return count == 1;
+//	}
 	
 	// 파일 삭제
-	public boolean deleteByNo(Long no) {
-		int count = sqlSession.delete("gallery.delete", no);
-		
-		return count == 1;
-	}
+	 public void deleteByNo(Long no) {
+	 	sqlSession.delete("gallery.deleteByNo", no);
+	 }
+	
+	// 방법2 (Dao시절 쓰던방법)
+//	public boolean deleteByNo(Long no) {
+//		int count = sqlSession.delete("gallery.deleteByNo", no);
+//		
+//		return count == 1;
+//	}
+	 
 }

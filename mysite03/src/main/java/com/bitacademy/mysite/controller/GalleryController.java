@@ -1,5 +1,7 @@
 package com.bitacademy.mysite.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +24,10 @@ public class GalleryController {
 	
 	@RequestMapping
 	public String index(Model model) {
-		model.addAttribute("list", galleryService.getContentsList());
+		List<GalleryVo> list = galleryService.getImageList();
+		model.addAttribute("list", list);
 		
+		// System.out.println(list);
 		return "gallery/index";
 	}
 	
@@ -35,8 +39,8 @@ public class GalleryController {
 		vo.setUrl(url);
 		galleryService.saveImages(vo);
 		
-		System.out.println(vo);
-		System.out.println(url);
+		// System.out.println(vo);
+		// System.out.println(url);
 		return "redirect:/gallery";
 	}
 	

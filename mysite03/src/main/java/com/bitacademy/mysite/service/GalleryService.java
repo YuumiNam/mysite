@@ -21,7 +21,7 @@ public class GalleryService {
 		galleryRepository.deleteByNo(no);
 	}
 	
-	public List<GalleryVo> getContentsList() {
+	public List<GalleryVo> getImageList() {
 		return galleryRepository.findAll();
 	}
 }

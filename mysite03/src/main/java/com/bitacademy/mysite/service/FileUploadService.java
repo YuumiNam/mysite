@@ -14,7 +14,7 @@ import com.bitacademy.mysite.exception.FileUploadServiceException;
 @Service
 public class FileUploadService {
 	private static String RESTORE_PATH = "/mysite-uploads"; // 파일을 저장할경로
-	private static String URL_BASE = "gallery/images"; // 
+	private static String URL_BASE = "/gallery/images"; // 
 	
 	public String restore(MultipartFile multipartFile) throws FileUploadServiceException {
 		String url = null;
