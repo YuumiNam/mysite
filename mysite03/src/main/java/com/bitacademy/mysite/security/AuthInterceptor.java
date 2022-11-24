@@ -48,6 +48,21 @@ public class AuthInterceptor implements HandlerInterceptor {
 		String role = auth.role(); // <-- 이게 admin일때
 		String authUserRole = authUser.getRole(); // <-- 이게 user인애들을 막아야함
 		
+		// 방법1
+		if("adimin".equals(role)) { 
+			if("user".equals(authUserRole)) {
+				response.sendRedirect(request.getContextPath());
+				return false;
+			}
+		}
+		
+		// 방법2
+		// if("adimin".equals(role) && "user".equals(authUserRole)) { 
+		// 	response.sendRedirect(request.getContextPath());
+		// 	return false;
+		// }
+		
+		
 		// @Auth도 붙어있고 인증도 되어있고 권한도 있음-> 접근 가능!!!
 		return true;
 	}
