@@ -57,10 +57,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 		}
 		
 		// 방법2
-		// if("adimin".equals(role) && "user".equals(authUserRole)) { 
-		// 	response.sendRedirect(request.getContextPath());
-		// 	return false;
-		// }
+//		 if("adimin".equals(role) && "user".equals(authUserRole)) { 
+//		 	response.sendRedirect(request.getContextPath());
+//		 	return false;
+//		 }
 		
 		
 		// @Auth도 붙어있고 인증도 되어있고 권한도 있음-> 접근 가능!!!
