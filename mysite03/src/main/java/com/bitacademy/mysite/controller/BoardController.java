@@ -21,7 +21,7 @@ public class BoardController {
 	public String list(Model model) {
 		model.addAttribute("list", boardService.findContentsList());
 		
-		System.out.println(boardService.findContentsList());
+		System.out.println("list === " + boardService.findContentsList());
 		return "board/list";
 	}
 	
@@ -63,7 +63,7 @@ public class BoardController {
 	@Auth
 	@RequestMapping(value="/reply/{no}/{userno}", method=RequestMethod.GET)
 	public String reply(@PathVariable("no") Long no, @PathVariable("userno") Long userNo, Model model) {
-		model.addAttribute("userno", userNo);
+	
 		return "board/reply";
 	}
 	
