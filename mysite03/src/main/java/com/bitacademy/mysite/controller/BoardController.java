@@ -21,7 +21,7 @@ public class BoardController {
 	public String list(Model model) {
 		model.addAttribute("list", boardService.findContentsList());
 		
-		// System.out.println(boardService.findContentsList());
+		System.out.println(boardService.findContentsList());
 		return "board/list";
 	}
 	

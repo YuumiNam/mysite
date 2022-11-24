@@ -18,7 +18,7 @@ delete from board;
 delete from board where no = '19' and user_no = '1';
 
 -- findAll
-select a.no, a.title, b.name as userName, a.hit, date_format(a.date, '%Y/%m/%d %H:%i:%s') as date, a.user_no as userNo
+select a.no, a.title, b.name as userName, a.hit, date_format(a.date, '%Y/%m/%d %H:%i:%s') as date, a.user_no as userNo, a.group_no as groupNo, a.order_no as orderNo, a.depth
 	from board a, user b
     where a.user_no = b.no
 order by group_no desc, order_no asc;
