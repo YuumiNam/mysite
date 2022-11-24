@@ -4,10 +4,10 @@
 <mapper namespace="board">
 	<select id="findAll" resultType="boardvo">
 		<![CDATA[
-			select a.no, a.title, b.name as userName, a.hit, date_format(a.date, '%Y/%m/%d %H:%i:%s') as date, a.user_no as userNo
+			select a.no, a.title, b.name as userName, a.hit, date_format(a.date, '%Y/%m/%d %H:%i:%s') as date, a.user_no as userNo, a.group_no as groupNo, a.order_no as orderNo, a.depth 
 				from board a, user b 
 				where a.user_no = b.no 
-			 order by group_no desc, order_no asc
+			order by group_no desc, order_no asc
 		]]>
 	</select>
 	
