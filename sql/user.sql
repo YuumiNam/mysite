@@ -1,5 +1,7 @@
 desc user;
 
+select * from user;
+
 -- join
 insert into user values(null, '둘리', 'dooli@gmail.com', '1234', 'male', now());
 

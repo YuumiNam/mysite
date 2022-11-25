@@ -27,6 +27,8 @@ public class MyBatisConfig {
 	// MyBatis SqlSessionTemplate
 	@Bean
 	public SqlSession sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
-		return new SqlSessionTemplate(sqlSessionFactory);
+		SqlSessionTemplate sqlSession = new SqlSessionTemplate(sqlSessionFactory);
+		
+		return sqlSession;
 	}
 }
