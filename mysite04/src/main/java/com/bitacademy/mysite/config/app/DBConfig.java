@@ -2,7 +2,7 @@ package com.bitacademy.mysite.config.app;
 
 import javax.sql.DataSource;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +25,7 @@ public class DBConfig {
 		dataSource.setUsername(env.getProperty("jdbc.username"));
 		dataSource.setPassword(env.getProperty("jdbc.password"));
 		dataSource.setInitialSize(env.getProperty("jdbc.initalSize", Integer.class));
-		// 에러뜸 dataSource.setMaxActive(env.getProperty("jdbc.maxActive", Integer.class));
+		dataSource.setMaxActive(env.getProperty("jdbc.maxActive", Integer.class));
 		
 		return dataSource;
 	}
