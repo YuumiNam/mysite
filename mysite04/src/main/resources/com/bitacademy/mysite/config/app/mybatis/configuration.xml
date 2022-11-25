@@ -9,10 +9,10 @@
     </typeAliases>
     	
 	<mappers>
-		<mapper resource="mybatis/mappers/user.xml" />
-		<mapper resource="mybatis/mappers/guestbook.xml" />
-		<mapper resource="mybatis/mappers/gallery.xml" />
-		<mapper resource="mybatis/mappers/board.xml" />
+		<mapper resource="com/bitacademy/mysite/config/app/mybatis/mappers/user.xml" />
+		<mapper resource="com/bitacademy/mysite/config/app/mybatis/mappers/guestbook.xml" />
+		<mapper resource="com/bitacademy/mysite/config/app/mybatis/mappers/gallery.xml" />
+		<mapper resource="com/bitacademy/mysite/config/app/mybatis/mappers/board.xml" />
 	</mappers>
 
 </configuration>

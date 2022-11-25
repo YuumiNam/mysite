@@ -12,9 +12,6 @@
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
-	<!-- auto proxy --><!-- AOP weaving작업을 할 때 필요한 객체생성 -->
-	<aop:aspectj-autoproxy />
-	
 	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
 	<mvc:annotation-driven>
 		<!-- Argument Resolver -->
@@ -76,8 +73,4 @@
 	   <property name="suffix" value=".jsp" />
 	</bean>
 	
-	<!-- Annotation Configuration : Auto Bean Scanning -->
-	<context:annotation-config />
-	<context:component-scan base-package="com.bitacademy.mysite.controller, com.bitacademy.mysite.exception" />
-
 </beans>
