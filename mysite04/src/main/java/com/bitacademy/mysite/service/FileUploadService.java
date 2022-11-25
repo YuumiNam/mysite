@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,8 +15,12 @@ import com.bitacademy.mysite.exception.FileUploadServiceException;
 
 @Service
 public class FileUploadService {
-	private static String RESTORE_PATH = "/mysite-uploads"; // 파일을 저장할경로
-	private static String URL_BASE = "/gallery/images"; // 
+	
+	// private static String RESTORE_PATH = "/mysite-uploads"; // 파일을 저장할경로
+	// private static String URL_BASE = "/gallery/images"; // 
+	
+	@Autowired
+	private Environment env;
 	
 	public String restore(MultipartFile multipartFile) throws FileUploadServiceException {
 		String url = null;
@@ -25,7 +31,7 @@ public class FileUploadService {
 			}
 			
 			// 저장해야할 곳에 폴더가 있나없나 확인 없으면 설정했던 저장경로를 만들어줌
-		    File restoreDirectory = new File(RESTORE_PATH);
+		    File restoreDirectory = new File(env.getProperty("fileupload.resourceMapping"));
 		    if(!restoreDirectory.exists()) {
 		    	restoreDirectory.mkdirs();
 		    }
@@ -43,12 +49,12 @@ public class FileUploadService {
 			
 			// 업로드한 파일을 저장할 경로설정 (반드시 이클립스 외부에다가 저장해주기!))
 			byte[] data = multipartFile.getBytes();
-			OutputStream os = new FileOutputStream(RESTORE_PATH + "/" + restoreFilename);
+			OutputStream os = new FileOutputStream(env.getProperty("fileupload.resourceMapping") + "/" + restoreFilename);
 			os.write(data);
 			os.close();
 			
 			// 외부에 있는 저장한 경로와 가상 url을 맵핑해준다 (리소스 맵핑)
-			url = URL_BASE + "/" + restoreFilename;
+			url = env.getProperty("fileupload.uploadLocation") + "/" + restoreFilename;
 			
 		} catch (IOException e) {
 			throw new FileUploadServiceException(e.toString());

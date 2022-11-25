@@ -75,4 +75,13 @@ public class UserController {
 		authUser.setName(userVo.getName());
 		return "redirect:/user/update";
 	}
+	
+	// 충돌 오류 방지
+	@RequestMapping("/auth")
+	public void auth() {
+	}
+
+	@RequestMapping("/logout")
+	public void logout() {
+	}
 }
