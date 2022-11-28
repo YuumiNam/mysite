@@ -10,6 +10,9 @@
 	<title>Insert title here</title>
 </head>
 <body>
-	<h1>Hello World</h1>
+	<h1>Exception Occurs!!</h1>
+	<pre style = "color:purple">
+		${exception }
+	</pre>
 </body>
 </html>
