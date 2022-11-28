@@ -44,7 +44,7 @@
 							<td>${vo.userName }</td>
 							<td>${vo.hit }</td>
 							<td>${vo.date }</td>
-							<c:if test = "${authUser.no == vo.userNo }">
+							<c:if test = "${authUser.no == vo.userNo || authUser.role == 'admin'}">
 								<td><a href="${pageContext.request.contextPath}/board/delete/${vo.no}/${authUser.no }" class="del">삭제</a></td>
 							</c:if>
 						</tr>

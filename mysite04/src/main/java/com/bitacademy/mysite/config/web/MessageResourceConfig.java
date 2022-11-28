@@ -11,7 +11,8 @@ public class MessageResourceConfig {
 	@Bean
 	public MessageSource resourceBundleMessageSource() {
 		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-		messageSource.setBasename("com/bitacademy/mysite/config/web/messages_ko");
+		
+		messageSource.setBasename("classpath:com/bitacademy/mysite/config/web/messages_ko");
 		messageSource.setDefaultEncoding("utf-8");
 		return messageSource;
 	}
