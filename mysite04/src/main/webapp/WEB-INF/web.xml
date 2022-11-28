@@ -9,21 +9,20 @@
 	<context-param>
 	     <param-name>contextClass</param-name>
 	     <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
-	</context-param>
-	
+	</context-param> 
+		
 	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>com.bitacademy.mysite.config.AppConfig</param-value>
-	</context-param>
-
+	     <param-name>contextConfigLocation</param-name>
+	     <param-value>com.bitacademy.mysite.config.AppConfig</param-value>
+	</context-param> 	
+	
 	<!-- Context Load Listener -->
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
-	<!-- Encoding Filter(한글처리) -->
+	
+	<!-- Encoding Filter -->
 	<filter>
-		<display-name>EncodingFilter</display-name>
 		<filter-name>EncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
@@ -31,7 +30,7 @@
 			<param-value>utf-8</param-value>
 		</init-param>
 	</filter>
-
+	
 	<filter-mapping>
 		<filter-name>EncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -51,25 +50,25 @@
 			<param-value>com.bitacademy.mysite.config.WebConfig</param-value>
 		</init-param>
 	</servlet>
-
+	
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-  
-  <!-- Common Error Page -->
-  <error-page>
-  	<error-code>500</error-code>
-  	<location>/WEB-INF/views/error/500.jsp</location>
-  </error-page>
-  
-  <!-- Welcome File List -->
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+	
+	<!-- Common Error Page -->
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/error/500.jsp</location>
+	</error-page>
+	
+	<!-- Welcome File List -->	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>

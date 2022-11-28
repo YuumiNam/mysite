@@ -22,14 +22,14 @@
 			<div id="user">
 				
 				<!-- FORM태그로 세팅 -->
-				<form:form modelAttribute="userVo" id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user/join">
+					<form:form modelAttribute="userVo" id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user/join">
 					
 					<label class="block-label" for="name">
 						<spring:message code="Join.form.label.name" />
 					</label>
 					
 					<!-- <input id="name" name="name" type="text" value="${userVo.name }"> 대체가능 -->
-					<form:input path="name" />
+					<form:input path="name" /> 
 					
 					<p style="text-align:left; padding:2px 0 2px 0; color:red">
 					<spring:hasBindErrors name="userVo"> <!-- 에러가 발생한 경우에만 들어오는거 하지만 FORM태그를 이용하면 더 쉬워짐 -->
@@ -38,7 +38,7 @@
 											text="${errors.getFieldError('name').defaultMessage }"/>
 						</c:if>
 					</spring:hasBindErrors>
-					</p>
+					</p> 
 
 					<label class="block-label" for="email">이메일</label>
 					<form:input path="email" />
