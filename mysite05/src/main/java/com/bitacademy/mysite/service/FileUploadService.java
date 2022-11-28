@@ -31,7 +31,7 @@ public class FileUploadService {
 			}
 			
 			// 저장해야할 곳에 폴더가 있나없나 확인 없으면 설정했던 저장경로를 만들어줌
-		    File restoreDirectory = new File(env.getProperty("fileupload.resourceMapping"));
+		    File restoreDirectory = new File(env.getProperty("fileupload.uploadLocation"));
 		    if(!restoreDirectory.exists()) {
 		    	restoreDirectory.mkdirs();
 		    }
@@ -49,12 +49,12 @@ public class FileUploadService {
 			
 			// 업로드한 파일을 저장할 경로설정 (반드시 이클립스 외부에다가 저장해주기!))
 			byte[] data = multipartFile.getBytes();
-			OutputStream os = new FileOutputStream(env.getProperty("fileupload.resourceMapping") + "/" + restoreFilename);
+			OutputStream os = new FileOutputStream(env.getProperty("fileupload.uploadLocation") + "/" + restoreFilename);
 			os.write(data);
 			os.close();
 			
 			// 외부에 있는 저장한 경로와 가상 url을 맵핑해준다 (리소스 맵핑)
-			url = env.getProperty("fileupload.uploadLocation") + "/" + restoreFilename;
+			url = env.getProperty("fileupload.resourceMapping") + "/" + restoreFilename;
 			
 		} catch (IOException e) {
 			throw new FileUploadServiceException(e.toString());
