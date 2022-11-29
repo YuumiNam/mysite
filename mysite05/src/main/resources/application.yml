@@ -10,10 +10,14 @@ spring:
    
    # mvc
    mvc:
+      static-path-pattern: /assets/**
       view:
          prefix: /WEB-INF/views/
          suffix: .jsp
-         
+   web:
+      resources:
+         static-locations: classpath:/assets/, file:/mysite-uploads
+   
    # multipart
    servlet:
       multipart:
