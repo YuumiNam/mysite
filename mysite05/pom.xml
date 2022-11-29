@@ -64,6 +64,7 @@
 		<dependency>
 		    <groupId>org.mariadb.jdbc</groupId>
 		    <artifactId>mariadb-java-client</artifactId>
+		    <version>2.7.2</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		
 		<!-- Spring Boot Dev Tools : Live Reload -->
