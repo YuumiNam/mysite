@@ -17,7 +17,7 @@ public class DBConfig {
 	
 	// Connection Pool DataSource
 	@Bean
-	public DataSource basicDataSource() {
+	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		
 		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));

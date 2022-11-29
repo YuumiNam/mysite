@@ -1,6 +1,7 @@
 package com.bitacademy.mysite.config.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -17,7 +18,8 @@ public class FileUploadConfig implements WebMvcConfigurer{
 	private Environment env;
 	
 	// Multipart Resolver 파일업로드
-	public MultipartResolver commonsMultipartResolver() {
+	@Bean
+	public MultipartResolver multipartResolver() { 
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 		
 		multipartResolver.setMaxUploadSize(env.getProperty("fileupload.maxUploadSize", Long.class));
@@ -26,7 +28,7 @@ public class FileUploadConfig implements WebMvcConfigurer{
 		
 		return multipartResolver;
 	}
-
+	
 	// MVC Resource Mapping 저장한 파일과 url을 맵핑
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

@@ -20,6 +20,7 @@ import com.bitacademy.mysite.vo.GalleryVo;
 public class GalleryController {
 	@Autowired
 	private GalleryService galleryService;
+	
 	@Autowired
 	private FileUploadService fileUploadService;
 	
@@ -34,14 +35,13 @@ public class GalleryController {
 	
 	@Auth(role="admin")
 	@RequestMapping("/upload")
-	public String upload(GalleryVo vo, @RequestParam("file") MultipartFile multipartFile, Model model) {
+	public String upload(
+		GalleryVo galleryVo,
+		@RequestParam("file") MultipartFile multipartFile) {
 		String url = fileUploadService.restore(multipartFile);
-	
-		vo.setUrl(url);
-		galleryService.saveImages(vo);
+		galleryVo.setUrl(url);
 		
-		// System.out.println(vo);
-		// System.out.println(url);
+		galleryService.saveImages(galleryVo);
 		return "redirect:/gallery";
 	}
 	

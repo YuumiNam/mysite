@@ -30,7 +30,7 @@
 						action="${pageContext.request.contextPath }/user/join">
 					
 					<label class="block-label" for="name">
-						<spring:message code="Join.form.label.name" text="이름"/> <!-- text="이름" 빼면 이상하게 에러남 -->
+						<spring:message code="Join.form.label.name" /> <!-- text="이름" 빼면 이상하게 에러남 -->
 					</label>
 					
 					<!-- <input id="name" name="name" type="text" value="${userVo.name }"> 대체가능 -->

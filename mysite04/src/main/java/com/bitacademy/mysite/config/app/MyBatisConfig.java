@@ -15,7 +15,7 @@ public class MyBatisConfig {
 	
 	// MyBatis SqlSessionFactory
 	@Bean
-	public SqlSessionFactory sqlSessionFactoryBean(DataSource dataSource, ApplicationContext applicationContext) throws Exception {
+	public SqlSessionFactory sqlSessionFactory(DataSource dataSource, ApplicationContext applicationContext) throws Exception {
 		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
 		
 		sqlSessionFactory.setDataSource(dataSource);
@@ -26,7 +26,7 @@ public class MyBatisConfig {
 	
 	// MyBatis SqlSessionTemplate
 	@Bean
-	public SqlSession sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+	public SqlSession sqlSession(SqlSessionFactory sqlSessionFactory) {
 		SqlSessionTemplate sqlSession = new SqlSessionTemplate(sqlSessionFactory);
 		
 		return sqlSession;
