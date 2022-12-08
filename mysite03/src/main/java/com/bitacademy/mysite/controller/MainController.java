@@ -12,7 +12,7 @@ public class MainController {
 	@RequestMapping({"", "/main"})
 	public String index() {
 		Logger.debug("MainController.index() called");
-		
+
 		return "main/index";
 	}
 }
