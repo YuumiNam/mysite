@@ -95,6 +95,7 @@
 
 	<build>
 		<finalName>mysite06</finalName>
+		<!-- WAR파일 -->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -111,6 +112,13 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		
+		<!-- <plugins> JAR파일
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+			</plugins> -->
 	</build>
-
+		
 </project>
