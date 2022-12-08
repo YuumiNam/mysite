@@ -1,0 +1,28 @@
+[src/main/java]
+com.bitacademy.mysite.config
+	|- AppConfig
+	|- WebConfig
+com.bitacademy.mysite.config.app
+	|- DBConfig
+	|- MyBatisConfig
+com.bitacademy.mysite.config.web
+	|- MVCConfig
+	|- SecurityConfig
+	|- FileuploadConfig
+	|- MessageResourceConfig
+	
+
+
+[src/main/resource]
+com.bitacademy.mysite.config.app
+	|- jdbc.properties
+com.bitacademy.mysite.config.app.mybatis
+	|- configuration.xml
+com.bitacademy.mysite.config.app.mybatis.mappers
+	|- user.xml
+	|- board.xml
+	|- ...	
+
+com.bitacademy.mysite.config.web
+	|- fileupload.properties
+	|- messages_ko.propertie

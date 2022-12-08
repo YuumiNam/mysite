@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bitacademy.mysite.exception.FileUploadServiceException;
 
 @Service
-@PropertySource("classpath:web/fileupload.properties")
+@PropertySource("classpath:com/bitacademy/mysite/config/web/fileupload.properties")
 public class FileUploadService {
 	
 	// private static String RESTORE_PATH = "/mysite-uploads"; // 파일을 저장할경로

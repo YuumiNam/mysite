@@ -41,7 +41,7 @@ spring:
    # datasource
    datasource:
       driver-class-name: org.mariadb.jdbc.Driver
-      url: jdbc:mariadb://127.0.0.1:3306/webdb?characterEncoding=utf8
+      url: jdbc:mariadb://192.168.0.94:3306/webdb?characterEncoding=utf8
       username: webdb
       password: webdb
       hikari:
@@ -56,7 +56,7 @@ mybatis:
 server:
    port: 8888
    servlet:
-      context-path: /mysite05
+      context-path: /mysite06
       encoding:
          charset: utf-8
          enabled: true
