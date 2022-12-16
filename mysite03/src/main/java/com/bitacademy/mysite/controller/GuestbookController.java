@@ -17,7 +17,7 @@ public class GuestbookController {
 	@Autowired
 	GuestbookService guestbookService;
 	
-	@RequestMapping
+	@RequestMapping("")
 	public String getContentsList(Model model) {
 		model.addAttribute("list", guestbookService.getContentsList());
 		
@@ -44,5 +44,4 @@ public class GuestbookController {
 		
 		return "redirect:/guestbook";
 	}
-	
 }
