@@ -21,6 +21,25 @@
 		<mvc:argument-resolvers>
 			<bean class="com.bitacademy.mysite.security.AuthUserHandlerMethodArgumentResolver"></bean>
 		</mvc:argument-resolvers>
+		<!-- Message Converters -->
+		<!-- 1. String  2. String이 아닌 Object -->
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter"> <!-- 기본적으로 되어있지만 한글이 깨지기 때문에 명시적으로 해야함 -->
+   				<property name="supportedMediaTypes">
+        			<list>
+             			<value>text/html; charset=UTF-8</value>
+        			</list>
+    			</property>
+			</bean>
+			
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+   				<property name="supportedMediaTypes">
+       				<list>
+            			<value>application/json; charset=UTF-8</value>
+        			</list>
+   				</property>
+			</bean>
+		</mvc:message-converters>
 	</mvc:annotation-driven>
 	
 	<!-- MVC Resource Mapping --> <!-- 저장한 파일과 url을 맵핑 -->
